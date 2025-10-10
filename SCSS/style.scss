@@ -1,0 +1,71 @@
+$transition-speed: 0.8s;
+$section-radius: 10px;
+$section-gap: 10px;
+$bg-images: patna, bengal, gujrat, up, haryana, jaipur, tamil, bengaluru, mumba,
+  telugu, pune, delhi;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  padding: 2em;
+  background-color: #000;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // 4 columns
+  grid-template-rows: repeat(3, 1fr); // 3 rows
+  gap: $section-gap;
+
+  section {
+    border: 1px solid white;
+    border-radius: $section-radius;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: transform $transition-speed ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      font-size: 1.2rem;
+      color: #fff;
+      text-align: center;
+      transition: all $transition-speed ease;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 4px 8px;
+      border-radius: $section-radius;
+    }
+  }
+
+  section:hover {
+    transform: scale(1.2);
+    z-index: 10;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px #fff;
+    }
+  }
+}
+
+@for $i from 1 through length($bg-images) {
+  main section:nth-child(#{$i}) {
+    background-image: url("./images/#{nth($bg-images, $i)}.webp");
+  }
+}
